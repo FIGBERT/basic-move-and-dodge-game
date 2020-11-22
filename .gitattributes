@@ -1,0 +1,13 @@
+*.gltf !text !filter !merge !diff
+*.tres !text !filter !merge !diff
+*.material !text !filter !merge !diff
+*.jpg !text !filter !merge !diff
+*.tscn !text !filter !merge !diff
+*.otf !text !filter !merge !diff
+scenes/blocks.tscn filter=lfs diff=lfs merge=lfs -text
+assets/fonts/SF-Pro-Rounded-Black.otf filter=lfs diff=lfs merge=lfs -text
+assets/block.gltf filter=lfs diff=lfs merge=lfs -text
+assets/blocks.tres filter=lfs diff=lfs merge=lfs -text
+*.jpg filter=lfs diff=lfs merge=lfs -text
+scenes/enemy.tscn filter=lfs diff=lfs merge=lfs -text
+assets/material-block.material filter=lfs diff=lfs merge=lfs -text
