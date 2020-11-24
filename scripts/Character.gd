@@ -1,6 +1,7 @@
 extends KinematicBody
 
 var velocity = Vector3(0,0,0)
+const SPEED = 6
 
 func _ready():
 	pass
@@ -12,9 +13,9 @@ func _physics_process(delta):
 	):
 		velocity.x = 0
 	elif Input.is_action_pressed("ui_right"):
-		velocity.x = 5
+		velocity.x = SPEED
 	elif Input.is_action_pressed("ui_left"):
-		velocity.x = -5
+		velocity.x = -SPEED
 	else:
 		velocity.x = lerp(velocity.x, 0, 0.1)
 	
@@ -24,9 +25,9 @@ func _physics_process(delta):
 	):
 		velocity.z = 0
 	elif Input.is_action_pressed("ui_up"):
-		velocity.z = -5
+		velocity.z = -SPEED
 	elif Input.is_action_pressed("ui_down"):
-		velocity.z = 5
+		velocity.z = SPEED
 	else:
 		velocity.z = lerp(velocity.z, 0, 0.1)
 	move_and_slide(velocity)
