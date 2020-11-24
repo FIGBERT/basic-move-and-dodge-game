@@ -1,35 +1,26 @@
 extends KinematicBody
 
-var velocity = Vector3(0,0,0)
-const SPEED = 10
+const acceleration: float = 0.1
+var velocity = Vector3.ZERO
+var speed: float = 9
 
 func _ready():
 	pass
 
 func _physics_process(delta):
+	var strength = Vector2(
+		Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
+		Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+	).normalized() * speed
+	
+	var motion = Vector2(
+		lerp(velocity.x, strength.x, acceleration),
+		lerp(velocity.z, strength.y, acceleration)
+	)
+	
+	velocity.x = motion.x
+	velocity.z = motion.y
 	$MeshInstance.rotate_z(deg2rad(-velocity.x))
 	$MeshInstance.rotate_x(deg2rad(velocity.z))
-	if (
-		Input.is_action_pressed("ui_right")
-		and Input.is_action_pressed("ui_left")
-	):
-		velocity.x = 0
-	elif Input.is_action_pressed("ui_right"):
-		velocity.x = SPEED
-	elif Input.is_action_pressed("ui_left"):
-		velocity.x = -SPEED
-	else:
-		velocity.x = lerp(velocity.x, 0, 0.1)
 	
-	if (
-		Input.is_action_pressed("ui_up")
-		and Input.is_action_pressed("ui_down")
-	):
-		velocity.z = 0
-	elif Input.is_action_pressed("ui_up"):
-		velocity.z = -SPEED
-	elif Input.is_action_pressed("ui_down"):
-		velocity.z = SPEED
-	else:
-		velocity.z = lerp(velocity.z, 0, 0.1)
 	move_and_slide(velocity)
