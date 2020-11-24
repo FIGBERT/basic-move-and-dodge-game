@@ -1,12 +1,14 @@
 extends KinematicBody
 
 var velocity = Vector3(0,0,0)
-const SPEED = 6
+const SPEED = 10
 
 func _ready():
 	pass
 
 func _physics_process(delta):
+	$MeshInstance.rotate_z(deg2rad(-velocity.x))
+	$MeshInstance.rotate_x(deg2rad(velocity.z))
 	if (
 		Input.is_action_pressed("ui_right")
 		and Input.is_action_pressed("ui_left")
