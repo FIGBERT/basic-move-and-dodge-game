@@ -1,3 +1,8 @@
+*.gltf filter=lfs diff=lfs merge=lfs -text
+*.tres filter=lfs diff=lfs merge=lfs -text
+*.material filter=lfs diff=lfs merge=lfs -text
+*.jpg filter=lfs diff=lfs merge=lfs -text
+*.tscn filter=lfs diff=lfs merge=lfs -text
 *.gltf !text !filter !merge !diff
 *.tres !text !filter !merge !diff
 *.material !text !filter !merge !diff
@@ -8,6 +13,5 @@ scenes/blocks.tscn filter=lfs diff=lfs merge=lfs -text
 assets/fonts/SF-Pro-Rounded-Black.otf filter=lfs diff=lfs merge=lfs -text
 assets/block.gltf filter=lfs diff=lfs merge=lfs -text
 assets/blocks.tres filter=lfs diff=lfs merge=lfs -text
-*.jpg filter=lfs diff=lfs merge=lfs -text
 scenes/enemy.tscn filter=lfs diff=lfs merge=lfs -text
 assets/material-block.material filter=lfs diff=lfs merge=lfs -text
