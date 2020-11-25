@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Character.gd" type="Script" id=2]
+[ext_resource path="res://scripts/Camera.gd" type="Script" id=3]
 
 [sub_resource type="BoxShape" id=1]
 
@@ -10,11 +11,11 @@
 [sub_resource type="BoxShape" id=3]
 extents = Vector3( 15, 1, 15 )
 
-[sub_resource type="SpatialMaterial" id=5]
+[sub_resource type="SpatialMaterial" id=4]
 albedo_color = Color( 0.0392157, 0.933333, 0.682353, 1 )
 
-[sub_resource type="CubeMesh" id=4]
-material = SubResource( 5 )
+[sub_resource type="CubeMesh" id=5]
+material = SubResource( 4 )
 size = Vector3( 30, 2, 30 )
 
 [node name="Level" type="Spatial"]
@@ -37,12 +38,21 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
 shape = SubResource( 3 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Floor"]
-mesh = SubResource( 4 )
+mesh = SubResource( 5 )
 material/0 = null
-
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.851398, 0.524521, 0, -0.524521, 0.851398, 0, 4.91959, 10.0583 )
 
 [node name="Character" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 script = ExtResource( 2 )
+
+[node name="Viewport" type="Spatial" parent="Character"]
+transform = Transform( 1, 0, 0, 0, 0.930884, 0.365315, 0, -0.365315, 0.930884, 0, 3.25256, 10.2951 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.851398, 0.524521, 0, -0.524521, 0.851398, 0, 9.91959, 19.0583 )
+script = ExtResource( 3 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.866025, -0.433013, -0.25, 0, -0.5, 0.866025, -0.5, -0.75, -0.433013, 0, 6.37746, 0 )
+shadow_enabled = true
+directional_shadow_max_distance = 50.0
