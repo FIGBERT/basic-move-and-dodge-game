@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/fonts/JetBrainsMono-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/fonts/DIN-Alternate-Bold.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://scripts/TitlePlayButton.gd" type="Script" id=3]
+[ext_resource path="res://scripts/GameOverButton.gd" type="Script" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 128
@@ -10,7 +10,7 @@ use_filter = true
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 64
+size = 48
 use_filter = true
 font_data = ExtResource( 2 )
 
@@ -24,7 +24,7 @@ __meta__ = {
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_right = 1280.0
 margin_bottom = 720.0
-color = Color( 0.713726, 0.678431, 0.623529, 1 )
+color = Color( 0.266667, 0.00784314, 0.443137, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -34,29 +34,29 @@ margin_top = 64.0
 margin_right = 1280.0
 margin_bottom = 259.0
 custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 0.0392157, 0.933333, 0.682353, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0.733333, 0, 1, 1 )
 custom_constants/shadow_offset_x = 6
-text = "Simple 3D Game"
+text = "Game Over"
 align = 1
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TitlePlayButton" type="Button" parent="."]
+[node name="GameOverButton" type="Button" parent="."]
+anchor_top = -0.328
+anchor_bottom = -0.328
 margin_left = 440.0
-margin_top = 420.0
+margin_top = 656.16
 margin_right = 840.0
-margin_bottom = 545.0
+margin_bottom = 781.16
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.682353, 0.933333, 0.0392157, 1 )
 custom_colors/font_color_hover = Color( 1, 0.556863, 0.0392157, 1 )
 custom_colors/font_color_pressed = Color( 0.917647, 0.129412, 0.796078, 1 )
-text = "PLAY"
+text = "PLAY AGAIN"
 script = ExtResource( 3 )
 __meta__ = {
-"_edit_use_anchors_": false,
-"_editor_description_": ""
+"_edit_use_anchors_": false
 }
-[connection signal="pressed" from="TitlePlayButton" to="TitlePlayButton" method="_on_TitlePlayButton_pressed"]
+[connection signal="pressed" from="GameOverButton" to="GameOverButton" method="_on_GameOverButton_pressed"]
