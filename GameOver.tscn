@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/fonts/JetBrainsMono-Regular.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://assets/fonts/DIN-Alternate-Bold.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/fonts/SF-Pro-Rounded-Black.otf" type="DynamicFontData" id=2]
 [ext_resource path="res://scripts/GameOverButton.gd" type="Script" id=3]
 
 [sub_resource type="DynamicFont" id=1]
@@ -55,6 +55,7 @@ custom_colors/font_color = Color( 0.682353, 0.933333, 0.0392157, 1 )
 custom_colors/font_color_hover = Color( 1, 0.556863, 0.0392157, 1 )
 custom_colors/font_color_pressed = Color( 0.917647, 0.129412, 0.796078, 1 )
 text = "PLAY AGAIN"
+flat = true
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false

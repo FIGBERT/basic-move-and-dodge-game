@@ -1,8 +1,8 @@
 extends KinematicBody
 
 const acceleration: float = 0.1
-var velocity = Vector3.ZERO
-var speed: float = 9
+var velocity = Vector3.DOWN * 12
+var speed: float = 15
 
 func _ready():
 	pass

@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://scenes/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Character.gd" type="Script" id=2]
@@ -7,6 +7,10 @@
 [ext_resource path="res://assets/textures/TactilePaving_Roughness.jpg" type="Texture" id=5]
 [ext_resource path="res://assets/blocks.tres" type="MeshLibrary" id=6]
 [ext_resource path="res://scenes/enemy.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/coin.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/hud_coin.png" type="Texture" id=9]
+[ext_resource path="res://assets/fonts/SF-Pro-Rounded-Black.otf" type="DynamicFontData" id=10]
+[ext_resource path="res://scripts/Counter.gd" type="Script" id=11]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 15, 1, 15 )
@@ -609,6 +613,16 @@ tracks/1/keys = {
 "values": [ Vector3( 0, 0, 0 ), Vector3( 360, 0, 0 ), Vector3( 360, 0, 180 ), Vector3( 270, 0, 180 ), Vector3( 360, 0, 180 ), Vector3( 360, 0, 0 ), Vector3( 0, 0, 0 ) ]
 }
 
+[sub_resource type="DynamicFont" id=25]
+size = 32
+use_filter = true
+font_data = ExtResource( 10 )
+
+[sub_resource type="DynamicFont" id=26]
+size = 48
+use_filter = true
+font_data = ExtResource( 10 )
+
 [node name="Level" type="Spatial"]
 
 [node name="Floor" type="StaticBody" parent="."]
@@ -637,7 +651,7 @@ transform = Transform( 0.866025, -0.433013, -0.25, 0, -0.5, 0.866025, -0.5, -0.7
 shadow_enabled = true
 directional_shadow_max_distance = 50.0
 
-[node name="GridMap" type="GridMap" parent="."]
+[node name="Walls" type="GridMap" parent="."]
 mesh_library = ExtResource( 6 )
 cell_size = Vector3( 1, 1, 1 )
 data = {
@@ -647,44 +661,46 @@ __meta__ = {
 "_editor_clip_": 0
 }
 
-[node name="Enemy 1" parent="." instance=ExtResource( 7 )]
+[node name="Enemies" type="Spatial" parent="."]
+
+[node name="Enemy 1" parent="Enemies" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 1, -6 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Enemy 1"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Enemies/Enemy 1"]
 autoplay = "Enemy 1 Animation"
 "anims/Enemy 1 Animation" = SubResource( 4 )
 
-[node name="Enemy 2" parent="." instance=ExtResource( 7 )]
+[node name="Enemy 2" parent="Enemies" instance=ExtResource( 7 )]
 transform = Transform( -0.683822, 0.729649, 0, -0.729649, -0.683822, 0, 0, 0, 1, -7.96444, 1, 12.5 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Enemy 2"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Enemies/Enemy 2"]
 autoplay = "Enemy 2 Animation"
 "anims/Enemy 1 Animation" = SubResource( 5 )
 "anims/Enemy 2 Animation" = SubResource( 6 )
 
-[node name="Enemy 3" parent="." instance=ExtResource( 7 )]
+[node name="Enemy 3" parent="Enemies" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5, 1, 13 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Enemy 3"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Enemies/Enemy 3"]
 autoplay = "Enemy 3 Animation"
 "anims/Enemy 1 Animation" = SubResource( 7 )
 "anims/Enemy 2 Animation" = SubResource( 8 )
 "anims/Enemy 3 Animation" = SubResource( 9 )
 
-[node name="Enemy 4" parent="." instance=ExtResource( 7 )]
+[node name="Enemy 4" parent="Enemies" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5, 1, -13 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Enemy 4"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Enemies/Enemy 4"]
 autoplay = "Enemy 4 Animation"
 "anims/Enemy 1 Animation" = SubResource( 10 )
 "anims/Enemy 2 Animation" = SubResource( 11 )
 "anims/Enemy 3 Animation" = SubResource( 12 )
 "anims/Enemy 4 Animation" = SubResource( 13 )
 
-[node name="Enemy 5" parent="." instance=ExtResource( 7 )]
+[node name="Enemy 5" parent="Enemies" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 0.987153, -0.159777, 0, 0.159777, 0.987153, 12.5, 1, -4.79569 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Enemy 5"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Enemies/Enemy 5"]
 autoplay = "Enemy 5 Animation"
 "anims/Enemy 1 Animation" = SubResource( 14 )
 "anims/Enemy 2 Animation" = SubResource( 15 )
@@ -692,10 +708,10 @@ autoplay = "Enemy 5 Animation"
 "anims/Enemy 4 Animation" = SubResource( 17 )
 "anims/Enemy 5 Animation" = SubResource( 18 )
 
-[node name="Enemy 6" parent="." instance=ExtResource( 7 )]
+[node name="Enemy 6" parent="Enemies" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 1, 2 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Enemy 6"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Enemies/Enemy 6"]
 autoplay = "Enemy 6 Animation"
 "anims/Enemy 1 Animation" = SubResource( 19 )
 "anims/Enemy 2 Animation" = SubResource( 20 )
@@ -703,9 +719,116 @@ autoplay = "Enemy 6 Animation"
 "anims/Enemy 4 Animation" = SubResource( 22 )
 "anims/Enemy 5 Animation" = SubResource( 23 )
 "anims/Enemy 6 Animation" = SubResource( 24 )
-[connection signal="body_entered" from="Enemy 1" to="Character" method="_on_enemy_body_entered"]
-[connection signal="body_entered" from="Enemy 2" to="Character" method="_on_enemy_body_entered"]
-[connection signal="body_entered" from="Enemy 3" to="Character" method="_on_enemy_body_entered"]
-[connection signal="body_entered" from="Enemy 4" to="Character" method="_on_enemy_body_entered"]
-[connection signal="body_entered" from="Enemy 5" to="Character" method="_on_enemy_body_entered"]
-[connection signal="body_entered" from="Enemy 6" to="Character" method="_on_enemy_body_entered"]
+
+[node name="Coins" type="Spatial" parent="."]
+
+[node name="Coin 1" parent="Coins" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0.5, 5 )
+
+[node name="Coin 2" parent="Coins" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.5, -7 )
+
+[node name="Coin 3" parent="Coins" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.5, 12.5 )
+
+[node name="Coin 4" parent="Coins" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0.5, 12.5 )
+
+[node name="Coin 5" parent="Coins" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.5, 5 )
+
+[node name="Coin 6" parent="Coins" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.5, -12.5 )
+
+[node name="Coin 7" parent="Coins" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0.5, 12.5 )
+
+[node name="Coin 8" parent="Coins" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0.5, 2.5 )
+
+[node name="Coin 9" parent="Coins" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5, 0.5, 13 )
+
+[node name="Coin 10" parent="Coins" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5, 0.5, -2 )
+
+[node name="Coin 11" parent="Coins" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0.5, 0 )
+
+[node name="Coin 12" parent="Coins" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5, 0.5, -5.5 )
+
+[node name="Coin 13" parent="Coins" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5, 0.5, -12.5 )
+
+[node name="Coin 14" parent="Coins" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0.5, -12.5 )
+
+[node name="Coin 15" parent="Coins" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0.5, -1.5 )
+
+[node name="Control" type="Control" parent="."]
+margin_left = -0.2229
+margin_top = 0.223007
+margin_right = 1279.78
+margin_bottom = 720.223
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="Control"]
+position = Vector2( 1119.45, 50 )
+scale = Vector2( 0.19, 0.19 )
+texture = ExtResource( 9 )
+
+[node name="X" type="Label" parent="Control"]
+margin_left = 1171.0
+margin_top = 24.878
+margin_right = 1206.0
+margin_bottom = 82.878
+custom_fonts/font = SubResource( 25 )
+custom_colors/font_color = Color( 0.952941, 0.737255, 0.164706, 1 )
+text = "X"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Counter" type="Label" parent="Control"]
+margin_left = 1218.98
+margin_top = 24.777
+margin_right = 1262.98
+margin_bottom = 82.777
+custom_fonts/font = SubResource( 26 )
+custom_colors/font_color = Color( 0.952941, 0.737255, 0.164706, 1 )
+text = "Q"
+align = 1
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="Control/Counter"]
+[connection signal="body_entered" from="Enemies/Enemy 1" to="Character" method="_on_enemy_body_entered"]
+[connection signal="body_entered" from="Enemies/Enemy 2" to="Character" method="_on_enemy_body_entered"]
+[connection signal="body_entered" from="Enemies/Enemy 3" to="Character" method="_on_enemy_body_entered"]
+[connection signal="body_entered" from="Enemies/Enemy 4" to="Character" method="_on_enemy_body_entered"]
+[connection signal="body_entered" from="Enemies/Enemy 5" to="Character" method="_on_enemy_body_entered"]
+[connection signal="body_entered" from="Enemies/Enemy 6" to="Character" method="_on_enemy_body_entered"]
+[connection signal="coin_collected" from="Coins/Coin 1" to="Control/Counter" method="_on_coin_collected"]
+[connection signal="coin_collected" from="Coins/Coin 2" to="Control/Counter" method="_on_coin_collected"]
+[connection signal="coin_collected" from="Coins/Coin 3" to="Control/Counter" method="_on_coin_collected"]
+[connection signal="coin_collected" from="Coins/Coin 4" to="Control/Counter" method="_on_coin_collected"]
+[connection signal="coin_collected" from="Coins/Coin 5" to="Control/Counter" method="_on_coin_collected"]
+[connection signal="coin_collected" from="Coins/Coin 6" to="Control/Counter" method="_on_coin_collected"]
+[connection signal="coin_collected" from="Coins/Coin 7" to="Control/Counter" method="_on_coin_collected"]
+[connection signal="coin_collected" from="Coins/Coin 8" to="Control/Counter" method="_on_coin_collected"]
+[connection signal="coin_collected" from="Coins/Coin 9" to="Control/Counter" method="_on_coin_collected"]
+[connection signal="coin_collected" from="Coins/Coin 10" to="Control/Counter" method="_on_coin_collected"]
+[connection signal="coin_collected" from="Coins/Coin 11" to="Control/Counter" method="_on_coin_collected"]
+[connection signal="coin_collected" from="Coins/Coin 12" to="Control/Counter" method="_on_coin_collected"]
+[connection signal="coin_collected" from="Coins/Coin 13" to="Control/Counter" method="_on_coin_collected"]
+[connection signal="coin_collected" from="Coins/Coin 14" to="Control/Counter" method="_on_coin_collected"]
+[connection signal="coin_collected" from="Coins/Coin 15" to="Control/Counter" method="_on_coin_collected"]
+[connection signal="timeout" from="Control/Counter/Timer" to="Control/Counter" method="_on_timer_timeout"]
