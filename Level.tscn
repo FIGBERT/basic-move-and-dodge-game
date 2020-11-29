@@ -811,8 +811,6 @@ script = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Timer" type="Timer" parent="Control/Counter"]
 [connection signal="body_entered" from="Enemies/Enemy 1" to="Character" method="_on_enemy_body_entered"]
 [connection signal="body_entered" from="Enemies/Enemy 2" to="Character" method="_on_enemy_body_entered"]
 [connection signal="body_entered" from="Enemies/Enemy 3" to="Character" method="_on_enemy_body_entered"]
@@ -834,4 +832,3 @@ __meta__ = {
 [connection signal="coin_collected" from="Coins/Coin 13" to="Control/Counter" method="_on_coin_collected"]
 [connection signal="coin_collected" from="Coins/Coin 14" to="Control/Counter" method="_on_coin_collected"]
 [connection signal="coin_collected" from="Coins/Coin 15" to="Control/Counter" method="_on_coin_collected"]
-[connection signal="timeout" from="Control/Counter/Timer" to="Control/Counter" method="_on_timer_timeout"]
